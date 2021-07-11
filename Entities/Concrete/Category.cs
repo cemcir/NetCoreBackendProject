@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    //Kalıtım ve implement almayan class kalmasın
+    //Kalıtım veya implement almayan class kalmasın
     public class Category:IEntity
     {
     }
