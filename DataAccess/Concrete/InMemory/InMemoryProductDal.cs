@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -23,35 +24,39 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public void Add(Product product)
+        public void Add(Product entity)
         {
-            _products.Add(product);
+            _products.Add(entity);
         }
 
-        public void Delete(Product product)
+        public void Delete(Product entity)
         {
             //LINQ - Language Integrated Query
             //Lambda
-            Product productToDelete = _products.SingleOrDefault(p=>p.ProductId==product.ProductId);
-            
+            Product productToDelete = _products.SingleOrDefault(p => p.ProductId == entity.ProductId);
+
             _products.Remove(productToDelete);
         }
 
-        public List<Product> GetAll()
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
         {
             return _products;
         }
 
-        public List<Product> GetAllByCategory(int categoryId)
-        {
-            return _products.Where(p => p.CategoryId == categoryId).ToList();
-        }
-
-        public void Update(Product product)
+        public void Update(Product entity)
         {
             //Gönderilen ürün id sine sahip olan listedeki ürünü bul
-            Product productToUpdate = _products.SingleOrDefault(p=>p.ProductId==product.ProductId);
-            productToUpdate = product;
+            Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == entity.ProductId);
+            productToUpdate.ProductName = entity.ProductName;
+            productToUpdate.CategoryId = entity.CategoryId;
+            productToUpdate.ProductId = entity.ProductId;
+            productToUpdate.UnitPrice = entity.UnitPrice;
+            productToUpdate.UnitsInStock = entity.UnitsInStock;   
         }
     }
 }

@@ -23,5 +23,10 @@ namespace Business.Concrete
 
             return _productDal.GetAll();
         }
+
+        public void Update(Product product)
+        {
+            _productDal.Update(product);
+        }
     }
 }
