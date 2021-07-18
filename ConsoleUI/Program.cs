@@ -6,16 +6,15 @@ using System;
 
 namespace ConsoleUI
 {
+    //SOLID
+    //Open Closed Principle
     class Program
     {
         static void Main(string[] args)
         {
-            ProductManager productManager = new ProductManager(new InMemoryProductDal());
-            Product p = new Product() {ProductId=1,CategoryId=2,ProductName="Kalem",UnitPrice=3,UnitsInStock=20 };
+            ProductManager productManager = new ProductManager(new EfProductDal());
 
-            productManager.Update(p);
-
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetByUnitPrice(270,5000))
             {
                 Console.WriteLine(product.ProductName);
             }
