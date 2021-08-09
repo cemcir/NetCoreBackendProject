@@ -7,17 +7,17 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    //Kalıtım veya implement almayan class kalmasın
-    public class Category:IEntity
+    public class Employee:IEntity
     {
-        public Category()
+        public Employee()
         {
-            Products = new List<Product>();
+            Orders = new List<Order>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public virtual List<Product> Products { get; set; }
+        public int EmployeeId { get; set; }
+        [Required]
+        public string EmployeeName { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }
